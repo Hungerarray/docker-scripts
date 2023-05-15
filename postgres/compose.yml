@@ -1,0 +1,26 @@
+services:
+  postgresdb:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: user@example.com
+      PGADMIN_DEFAULT_PASSWORD: SuperSecret
+    ports:
+      - "5050:80"
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+      - ./sharedFiles:/sharedFiles
+
+volumes:
+  db_data:
+  pgadmin_data:
